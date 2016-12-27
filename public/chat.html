@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Anonymous Chat</title>
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
+  <body>
+    <div id='messages'></div>
+
+    <form id='send-form'>
+      <input id='send-message' autocomplete='off' autofocus />
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var socket = io()
+
+        // join
+        var room = location.search.substr(1)
+        var nickname = location.hash.substr(1)
+        socket.emit('join', room, nickname)
+
+        const messageEl = document.getElementById('messages')
+        socket.on('system', function (msg) {
+          $('#messages').append(systemMsg(msg))
+          // scroll to the end of text
+          messageEl.scrollTop = messageEl.scrollHeight
+        })
+
+        socket.on('message', function (nickname, msg) {
+          $('#messages').append(chatMsg(nickname, msg))
+          // scroll to the end of text
+          messageEl.scrollTop = messageEl.scrollHeight
+        })
+
+        $('#send-form').submit(function () {
+          var msg = $('#send-message').val()
+          socket.emit('message', msg)
+          $('#send-message').val('')
+          return false
+        })
+
+        function chatMsg (nickname, msg) {
+          return $('<div>').addClass('message general').text(nickname + ' :: '+ msg)
+        }
+
+        function systemMsg (msg) {
+          return $('<div>').addClass('message system').html('[*] ' + msg)
+        }
+      })
+    </script>
+  </body>
+</html>
