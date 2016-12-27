@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Anonymous Chat</title>
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
+  <body>
+    <div id='instruction'>
+      <h1>[ Anonymous Chat ]</h1>
+      <p>Enter a room with your nickname:</p>
+      <code>
+        <pre id='usage'></pre>
+      </code>
+    </div>
+    <script>
+      var origin = location.origin
+      var usage = origin + '/?room#nickname'
+      document.getElementById('usage').append(usage)
+    </script>
+  </body>
+</html>
