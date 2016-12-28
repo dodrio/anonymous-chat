@@ -1,14 +1,15 @@
 {
-  "name": "5.chat",
+  "name": "anonymous-chat",
   "version": "1.0.0",
-  "description": "",
+  "description": "Chat room for who has no past and future.",
   "main": "index.js",
   "scripts": {
+    "start": "node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "m31271n",
+  "license": "MIT",
   "dependencies": {
     "jquery": "^3.1.1",
     "mime": "^1.3.4",
