@@ -2,9 +2,12 @@
 
 const httpServer = require('./lib/http_server')
 const chatServer = require('./lib/chat_server')
+const name = require('./package.json').name
 
+process.title = name
 chatServer.attach(httpServer)
 
-httpServer.listen(3000, () => {
-  console.log('listening on *:3000')
+const port = 3000
+httpServer.listen(port, () => {
+  console.log(`listening on ${port}...`)
 })
